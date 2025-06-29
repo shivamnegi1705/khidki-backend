@@ -1,8 +1,33 @@
 # Vercel Deployment Troubleshooting Guide
 
-## Current Issue: "This Serverless Function has crashed"
+## Current Issue: "TypeError: OAuth2Strategy requires a clientID option"
 
-You're currently seeing an error message: "This Serverless Function has crashed" with a 500 INTERNAL_SERVER_ERROR and code "FUNCTION_INVOCATION_FAILED". This is a common issue when deploying Node.js applications to Vercel's serverless environment.
+You're currently seeing an error message: "TypeError: OAuth2Strategy requires a clientID option" with a 500 INTERNAL_SERVER_ERROR. This error occurs because the application is trying to initialize the Google OAuth2 strategy without the required environment variables.
+
+### Immediate Fix
+
+We've updated the passport.js file to make the Google OAuth2 strategy optional when the required environment variables are not available. This should fix the immediate error.
+
+After applying these changes, redeploy your application to Vercel.
+
+### Long-term Solution
+
+If you want to use Google OAuth authentication:
+
+1. Set up the required environment variables in Vercel:
+   - GOOGLE_CLIENT_ID
+   - GOOGLE_CLIENT_SECRET
+   - GOOGLE_CALLBACK_URL (should be https://your-backend-url.vercel.app/api/user/auth/google/callback)
+
+2. Make sure your Google OAuth application in the Google Cloud Console is configured correctly:
+   - Add your Vercel deployment URL to the authorized JavaScript origins
+   - Add your callback URL to the authorized redirect URIs
+
+If you don't need Google OAuth authentication, you can safely ignore this error as the application will now work without it.
+
+## Previous Issue: "This Serverless Function has crashed"
+
+You might also see a general error message: "This Serverless Function has crashed" with a 500 INTERNAL_SERVER_ERROR and code "FUNCTION_INVOCATION_FAILED". This is a common issue when deploying Node.js applications to Vercel's serverless environment.
 
 ## Potential Causes and Solutions
 

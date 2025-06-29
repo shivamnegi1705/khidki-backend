@@ -36,8 +36,18 @@ app.use(session({
     }
 }))
 
-// Initialize passport
+// Initialize passport (only if needed)
 app.use(passport.initialize())
+
+// Handle potential errors
+app.use((err, req, res, next) => {
+    console.error('Server error:', err);
+    res.status(500).json({ 
+        success: false, 
+        message: 'Server error', 
+        error: process.env.NODE_ENV === 'production' ? 'Internal server error' : err.message 
+    });
+});
 
 // api endpoints
 app.use('/api/user',userRouter)
