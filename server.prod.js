@@ -25,10 +25,13 @@ connectCloudinary()
 // middlewares
 app.use(express.json())
 app.use(cors({
-    origin: ['https://khidki-frontend.vercel.app', 'http://localhost:5173', 'http://localhost:5174'],
+    origin: function(origin, callback) {
+        // Allow any origin
+        callback(null, true);
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    allowedHeaders: ['Content-Type', 'Authorization', 'token']
 }))
 
 // Session configuration
@@ -44,6 +47,9 @@ app.use(session({
 
 // Initialize passport
 app.use(passport.initialize())
+
+// Handle OPTIONS requests for CORS preflight
+app.options('*', cors());
 
 // API endpoints
 app.use('/api/user', userRouter)
