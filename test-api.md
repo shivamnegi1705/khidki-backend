@@ -1,19 +1,19 @@
 # API Testing Commands
 
-Use these curl commands to test your backend API deployed on Vercel. Replace `https://khidki-backend.vercel.app` with your actual backend URL if different.
+Use these curl commands to test your backend API deployed on Render. Replace `https://khidki-backend.onrender.com` with your actual backend URL if different.
 
 ## Basic API Check
 
 ```bash
 # Check if API is working
-curl -X GET https://khidki-backend.vercel.app/
+curl -X GET https://khidki-backend.onrender.com/
 ```
 
 ## User API
 
 ### Register a new user
 ```bash
-curl -X POST https://khidki-backend.vercel.app/api/user/register \
+curl -X POST https://khidki-backend.onrender.com/api/user/register \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Test User",
@@ -24,7 +24,7 @@ curl -X POST https://khidki-backend.vercel.app/api/user/register \
 
 ### Login
 ```bash
-curl -X POST https://khidki-backend.vercel.app/api/user/login \
+curl -X POST https://khidki-backend.onrender.com/api/user/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "test@example.com",
@@ -34,13 +34,13 @@ curl -X POST https://khidki-backend.vercel.app/api/user/login \
 
 ### Get user profile (requires authentication token)
 ```bash
-curl -X GET https://khidki-backend.vercel.app/api/user/profile \
+curl -X GET https://khidki-backend.onrender.com/api/user/profile \
   -H "Authorization: Bearer YOUR_TOKEN_HERE"
 ```
 
 ### Update user profile (requires authentication token)
 ```bash
-curl -X PUT https://khidki-backend.vercel.app/api/user/profile \
+curl -X PUT https://khidki-backend.onrender.com/api/user/profile \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_TOKEN_HERE" \
   -d '{
@@ -52,17 +52,17 @@ curl -X PUT https://khidki-backend.vercel.app/api/user/profile \
 
 ### Get all products
 ```bash
-curl -X GET https://khidki-backend.vercel.app/api/product
+curl -X GET https://khidki-backend.onrender.com/api/product
 ```
 
 ### Get product by ID
 ```bash
-curl -X GET https://khidki-backend.vercel.app/api/product/PRODUCT_ID_HERE
+curl -X GET https://khidki-backend.onrender.com/api/product/PRODUCT_ID_HERE
 ```
 
 ### Create product (requires admin authentication)
 ```bash
-curl -X POST https://khidki-backend.vercel.app/api/product \
+curl -X POST https://khidki-backend.onrender.com/api/product \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer ADMIN_TOKEN_HERE" \
   -d '{
@@ -82,7 +82,7 @@ curl -X POST https://khidki-backend.vercel.app/api/product \
 
 ### Update product (requires admin authentication)
 ```bash
-curl -X PUT https://khidki-backend.vercel.app/api/product/PRODUCT_ID_HERE \
+curl -X PUT https://khidki-backend.onrender.com/api/product/PRODUCT_ID_HERE \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer ADMIN_TOKEN_HERE" \
   -d '{
@@ -93,7 +93,7 @@ curl -X PUT https://khidki-backend.vercel.app/api/product/PRODUCT_ID_HERE \
 
 ### Delete product (requires admin authentication)
 ```bash
-curl -X DELETE https://khidki-backend.vercel.app/api/product/PRODUCT_ID_HERE \
+curl -X DELETE https://khidki-backend.onrender.com/api/product/PRODUCT_ID_HERE \
   -H "Authorization: Bearer ADMIN_TOKEN_HERE"
 ```
 
@@ -101,13 +101,13 @@ curl -X DELETE https://khidki-backend.vercel.app/api/product/PRODUCT_ID_HERE \
 
 ### Get user cart (requires authentication)
 ```bash
-curl -X GET https://khidki-backend.vercel.app/api/cart \
+curl -X GET https://khidki-backend.onrender.com/api/cart \
   -H "Authorization: Bearer YOUR_TOKEN_HERE"
 ```
 
 ### Add item to cart (requires authentication)
 ```bash
-curl -X POST https://khidki-backend.vercel.app/api/cart \
+curl -X POST https://khidki-backend.onrender.com/api/cart \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_TOKEN_HERE" \
   -d '{
@@ -118,7 +118,7 @@ curl -X POST https://khidki-backend.vercel.app/api/cart \
 
 ### Update cart item quantity (requires authentication)
 ```bash
-curl -X PUT https://khidki-backend.vercel.app/api/cart/CART_ITEM_ID_HERE \
+curl -X PUT https://khidki-backend.onrender.com/api/cart/CART_ITEM_ID_HERE \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_TOKEN_HERE" \
   -d '{
@@ -128,7 +128,7 @@ curl -X PUT https://khidki-backend.vercel.app/api/cart/CART_ITEM_ID_HERE \
 
 ### Remove item from cart (requires authentication)
 ```bash
-curl -X DELETE https://khidki-backend.vercel.app/api/cart/CART_ITEM_ID_HERE \
+curl -X DELETE https://khidki-backend.onrender.com/api/cart/CART_ITEM_ID_HERE \
   -H "Authorization: Bearer YOUR_TOKEN_HERE"
 ```
 
@@ -136,7 +136,7 @@ curl -X DELETE https://khidki-backend.vercel.app/api/cart/CART_ITEM_ID_HERE \
 
 ### Create a new order (requires authentication)
 ```bash
-curl -X POST https://khidki-backend.vercel.app/api/order \
+curl -X POST https://khidki-backend.onrender.com/api/order \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_TOKEN_HERE" \
   -d '{
@@ -158,25 +158,25 @@ curl -X POST https://khidki-backend.vercel.app/api/order \
 
 ### Get all orders (requires admin authentication)
 ```bash
-curl -X GET https://khidki-backend.vercel.app/api/order/admin \
+curl -X GET https://khidki-backend.onrender.com/api/order/admin \
   -H "Authorization: Bearer ADMIN_TOKEN_HERE"
 ```
 
 ### Get user orders (requires authentication)
 ```bash
-curl -X GET https://khidki-backend.vercel.app/api/order \
+curl -X GET https://khidki-backend.onrender.com/api/order \
   -H "Authorization: Bearer YOUR_TOKEN_HERE"
 ```
 
 ### Get order by ID (requires authentication)
 ```bash
-curl -X GET https://khidki-backend.vercel.app/api/order/ORDER_ID_HERE \
+curl -X GET https://khidki-backend.onrender.com/api/order/ORDER_ID_HERE \
   -H "Authorization: Bearer YOUR_TOKEN_HERE"
 ```
 
 ### Update order status (requires admin authentication)
 ```bash
-curl -X PUT https://khidki-backend.vercel.app/api/order/ORDER_ID_HERE \
+curl -X PUT https://khidki-backend.onrender.com/api/order/ORDER_ID_HERE \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer ADMIN_TOKEN_HERE" \
   -d '{
@@ -190,20 +190,20 @@ If you encounter any issues with these curl commands, try the following:
 
 1. **CORS Issues**: Add the `-v` flag to see detailed request/response information:
    ```bash
-   curl -v -X GET https://khidki-backend.vercel.app/
+   curl -v -X GET https://khidki-backend.onrender.com/
    ```
 
 2. **Authentication Issues**: Ensure you're using a valid token and it's properly formatted:
    ```bash
-   curl -X GET https://khidki-backend.vercel.app/api/user/profile \
+   curl -X GET https://khidki-backend.onrender.com/api/user/profile \
      -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
    ```
 
 3. **Request Body Issues**: Validate your JSON is properly formatted:
    ```bash
-   curl -X POST https://khidki-backend.vercel.app/api/user/login \
+   curl -X POST https://khidki-backend.onrender.com/api/user/login \
      -H "Content-Type: application/json" \
      -d '{"email": "test@example.com", "password": "password123"}'
    ```
 
-4. **Server Errors**: If you get a 500 error, check the Vercel logs for more details.
+4. **Server Errors**: If you get a 500 error, check the Render logs for more details.

@@ -1,4 +1,4 @@
-# Frontend Integration Guide
+# Frontend Integration Guide for Render
 
 This guide will help you update your frontend application to work with your backend API deployed on Render.
 
@@ -160,11 +160,11 @@ After updating your frontend configuration:
 1. Build your frontend application:
 
 ```bash
-cd /Users/neshivam/workspaces/khidki-frontend
+cd /path/to/your/frontend
 npm run build
 ```
 
-2. Deploy your frontend to your preferred hosting platform (if not already deployed)
+2. Deploy your frontend to your preferred hosting platform (Render, Netlify, Vercel, etc.)
 
 3. Test the integration by:
    - Logging in
@@ -196,11 +196,11 @@ If your frontend can't connect to the backend:
 
 1. Verify that your API base URL is correct
 2. Check that your backend is deployed and running
-3. Test the API endpoints using the curl commands in `test-api.md`
+3. Test the API endpoints using tools like Postman or curl
 
 ## Example: Updating a React Frontend
 
-Here's an example of updating a React frontend to use the Vercel-deployed backend:
+Here's an example of updating a React frontend to use the Render-deployed backend:
 
 1. Create or update an API service file:
 
