@@ -19,8 +19,10 @@ connectCloudinary()
 // middlewares
 app.use(express.json())
 app.use(cors({
-    origin: [process.env.FRONTEND_URL || 'http://localhost:5173', 'http://localhost:5174'],
-    credentials: true
+    origin: [process.env.FRONTEND_URL || 'https://khidki-frontend.vercel.app', 'http://localhost:5173', 'http://localhost:5174'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }))
 
 // Session configuration
@@ -28,7 +30,10 @@ app.use(session({
     secret: process.env.JWT_SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: process.env.NODE_ENV === 'production' }
+    cookie: { 
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+    }
 }))
 
 // Initialize passport
