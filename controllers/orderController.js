@@ -1,7 +1,7 @@
 import orderModel from "../models/orderModel.js";
 import userModel from "../models/userModel.js";
 import productModel from "../models/productModel.js";
-import Stripe from 'stripe'
+// import Stripe from 'stripe' - commented out as Stripe is not supported for now
 import razorpay from 'razorpay'
 
 // global variables
@@ -26,7 +26,7 @@ const updateProductQuantities = async (items) => {
 }
 
 // gateway initialize
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+// const stripe = new Stripe(process.env.STRIPE_SECRET_KEY) - commented out as Stripe is not supported for now
 
 const razorpayInstance = new razorpay({
     key_id : process.env.RAZORPAY_KEY_ID,
@@ -68,7 +68,8 @@ const placeOrder = async (req,res) => {
 
 }
 
-// Placing orders using Stripe Method
+// Placing orders using Stripe Method - commented out as Stripe is not supported for now
+/*
 const placeOrderStripe = async (req,res) => {
     try {
         
@@ -124,8 +125,10 @@ const placeOrderStripe = async (req,res) => {
         res.json({success:false,message:error.message})
     }
 }
+*/
 
-// Verify Stripe 
+// Verify Stripe - commented out as Stripe is not supported for now
+/*
 const verifyStripe = async (req,res) => {
 
     const { orderId, success, userId } = req.body
@@ -153,6 +156,7 @@ const verifyStripe = async (req,res) => {
     }
 
 }
+*/
 
 // Placing orders using Razorpay Method
 const placeOrderRazorpay = async (req,res) => {
@@ -266,4 +270,5 @@ const updateStatus = async (req,res) => {
     }
 }
 
-export {verifyRazorpay, verifyStripe ,placeOrder, placeOrderStripe, placeOrderRazorpay, allOrders, userOrders, updateStatus}
+// Export without Stripe functions as Stripe is not supported for now
+export {verifyRazorpay, /* verifyStripe, */ placeOrder, /* placeOrderStripe, */ placeOrderRazorpay, allOrders, userOrders, updateStatus}
