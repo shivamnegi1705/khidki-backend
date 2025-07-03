@@ -1,8 +1,7 @@
 import orderModel from "../models/orderModel.js";
 import userModel from "../models/userModel.js";
 import productModel from "../models/productModel.js";
-// Stripe import commented out as it's not supported for now
-// import Stripe from 'stripe'
+import Stripe from 'stripe'
 import razorpay from 'razorpay'
 
 // global variables
@@ -27,16 +26,14 @@ const updateProductQuantities = async (items) => {
 }
 
 // gateway initialize
-// Stripe initialization commented out as it's not supported for now
-// const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 const razorpayInstance = new razorpay({
     key_id : process.env.RAZORPAY_KEY_ID,
     key_secret : process.env.RAZORPAY_KEY_SECRET,
 })
 
-// Placing orders using COD Method - Commented out as it's not supported for now
-/*
+// Placing orders using COD Method
 const placeOrder = async (req,res) => {
     
     try {
@@ -70,10 +67,8 @@ const placeOrder = async (req,res) => {
     }
 
 }
-*/
 
-// Placing orders using Stripe Method - Commented out as it's not supported for now
-/*
+// Placing orders using Stripe Method
 const placeOrderStripe = async (req,res) => {
     try {
         
@@ -129,10 +124,8 @@ const placeOrderStripe = async (req,res) => {
         res.json({success:false,message:error.message})
     }
 }
-*/
 
-// Verify Stripe - Commented out as it's not supported for now
-/*
+// Verify Stripe 
 const verifyStripe = async (req,res) => {
 
     const { orderId, success, userId } = req.body
@@ -160,7 +153,6 @@ const verifyStripe = async (req,res) => {
     }
 
 }
-*/
 
 // Placing orders using Razorpay Method
 const placeOrderRazorpay = async (req,res) => {
@@ -274,17 +266,4 @@ const updateStatus = async (req,res) => {
     }
 }
 
-// Export commented out payment methods as empty functions to avoid breaking imports
-const placeOrder = (req, res) => {
-    res.json({success: false, message: "Cash on Delivery is not supported at this time"});
-};
-
-const placeOrderStripe = (req, res) => {
-    res.json({success: false, message: "Stripe payments are not supported at this time"});
-};
-
-const verifyStripe = (req, res) => {
-    res.json({success: false, message: "Stripe payments are not supported at this time"});
-};
-
-export {verifyRazorpay, verifyStripe, placeOrder, placeOrderStripe, placeOrderRazorpay, allOrders, userOrders, updateStatus}
+export {verifyRazorpay, verifyStripe ,placeOrder, placeOrderStripe, placeOrderRazorpay, allOrders, userOrders, updateStatus}
