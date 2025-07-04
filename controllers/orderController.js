@@ -3,6 +3,7 @@ import userModel from "../models/userModel.js";
 import productModel from "../models/productModel.js";
 // import Stripe from 'stripe' - commented out as Stripe is not supported for now
 import razorpay from 'razorpay'
+import { generateInvoice } from "../utils/invoiceGenerator.js";
 
 // global variables
 const currency = 'inr'
@@ -55,6 +56,16 @@ const placeOrder = async (req,res) => {
 
         // Update product quantities
         await updateProductQuantities(items);
+
+        // Generate invoice for the order
+        try {
+            const invoice = await generateInvoice(newOrder);
+            // Update order with invoice reference
+            await orderModel.findByIdAndUpdate(newOrder._id, { invoice: invoice._id });
+        } catch (invoiceError) {
+            console.error("Error generating invoice:", invoiceError);
+            // Continue with order placement even if invoice generation fails
+        }
 
         await userModel.findByIdAndUpdate(userId,{cartData:{}})
 
@@ -211,9 +222,26 @@ const verifyRazorpay = async (req,res) => {
                 await updateProductQuantities(order.items);
             }
             
-            await orderModel.findByIdAndUpdate(orderInfo.receipt,{payment:true});
-            await userModel.findByIdAndUpdate(userId,{cartData:{}})
-            res.json({ success: true, message: "Payment Successful" })
+        const updatedOrder = await orderModel.findByIdAndUpdate(
+            orderInfo.receipt,
+            { payment: true },
+            { new: true }
+        );
+
+        // Generate invoice for the order if payment is successful
+        try {
+            if (!updatedOrder.invoice) {
+                const invoice = await generateInvoice(updatedOrder);
+                // Update order with invoice reference
+                await orderModel.findByIdAndUpdate(updatedOrder._id, { invoice: invoice._id });
+            }
+        } catch (invoiceError) {
+            console.error("Error generating invoice:", invoiceError);
+            // Continue with payment verification even if invoice generation fails
+        }
+
+        await userModel.findByIdAndUpdate(userId,{cartData:{}})
+        res.json({ success: true, message: "Payment Successful" })
         } else {
              res.json({ success: false, message: 'Payment Failed' });
         }
